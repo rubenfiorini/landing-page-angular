@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product, productsList } from '../productos/productos.mocks';
+import { IProduct } from '../models/product.model';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-poduct-detail',
@@ -12,12 +14,24 @@ export class PoductDetailComponent implements OnInit{
 
   product?: Product; //aca vamos a guardar el producto para luego mostrarlo
   productList: Product[] = productsList; //creamos una array con toda la lista de productos
+  producto?: IProduct; 
   loading: boolean = true;
   color: string = '';
 
-  constructor(private _route: ActivatedRoute){}
+  constructor(private _route: ActivatedRoute, private _apiService: ApiService){}
   
   ngOnInit(): void {
+
+    
+    this._route.params.subscribe(params =>{
+      this._apiService.getProduct(params['productoId']).subscribe((data: IProduct) => {
+        console.log(data);
+        this.producto = data;
+        this.color = this.producto?.price as number > 200 ? 'red' : '';
+        this.loading = false;
+      })
+    })
+    
     /*
     //cuando carga el componente tomamos lo del browser y seteamos las variable 
     this._route.params.subscribe(params =>{
@@ -29,6 +43,7 @@ export class PoductDetailComponent implements OnInit{
     })
     */
 
+    /*
     //Simulamos una demora en la carga de product
     setTimeout(() => {
       //cuando carga el componente tomamos lo del browser y seteamos las variable 
@@ -43,6 +58,9 @@ export class PoductDetailComponent implements OnInit{
       })
 
     }, 2000);
+    */
+
+
     
   }
 }

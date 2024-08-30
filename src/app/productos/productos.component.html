@@ -1,21 +1,23 @@
-<h1>Productos de limpieza</h1>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Producto</th>
-      <th scope="col">Precio</th>
-      <th scope="col">Detalle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let producto of productList">
-      <th scope="row">{{producto.id}}</th>
-      <td>{{producto.title}}</td>
-      <td [ngClass]="{'red' : producto.price > 200}">{{producto.price|currency}}</td>
-      <td>{{producto.description}}</td>
-      <!-- [routerLink]="['donde-va-a-navegar','parametro1','parametros2'] -->
-      <button type="button" class="btn btn-outline-primary" [routerLink]="['/productos', producto.id]">Detalle</button>
-    </tr>
-  </tbody> 
-  </table>
+<div class="container">
+  <h1>Productos de limpieza</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Producto</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Detalle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of productList">
+        <th scope="row">{{producto.id}}</th>
+        <td>{{producto.title}}</td>
+        <td [ngClass]="{'red' : producto.price > 200}">{{producto.price|currency}}</td>
+        <td>{{producto.description}}</td>
+        <!-- [routerLink]="['donde-va-a-navegar','parametro1','parametros2'] -->
+        <button type="button" class="btn btn-outline-primary" [routerLink]="['/productos', producto.id]">Detalle</button>
+      </tr>
+    </tbody> 
+    </table>
+</div>
